@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.links {
+  @apply text-white/60 hover:scale-[1.2] md:hover:scale-150 text-xl md:text-2xl transition;
+}
+.active {
+  @apply text-white/90 scale-150 text-[1.32rem] md:text-2xl;
+}
+.no-outlines {
+  @apply outline-none focus:outline-none active:outline-none;
+}

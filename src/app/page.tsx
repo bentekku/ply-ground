@@ -1,3 +1,12 @@
-export default function Home() {
-  return <main className="">H O M E</main>;
+import React from "react";
+import { print } from "../../api/connection.api";
+
+type Props = {};
+
+print();
+
+function Page({}: Props) {
+  return <div>Home</div>;
 }
+
+export default Page;

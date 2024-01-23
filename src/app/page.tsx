@@ -47,13 +47,15 @@ const Page = () => {
     }
   }, []);
 
-  {
-    if (games.length !== 0) {
-      games.map((game) => {
-        return <Card key={game.slug} {...game} />;
-      });
-    }
-  }
+  return (
+    <main className="px-[2rem] pt-[2rem] pb-[6rem] md:pb-[8rem]  flex flex-wrap gap-[4rem] md:gap-[3rem] justify-center">
+      {games.length !== 0
+        ? games.map((game) => {
+            return <Card key={game.slug} {...game} />;
+          })
+        : null}
+    </main>
+  );
 };
 
 export default Page;

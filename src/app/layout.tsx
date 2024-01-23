@@ -17,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="bg-gray-950 text-white h-[5000px]">
+    <html lang="en" className="bg-gray-950 text-white">
       <body className={inter.className}>
         <SearchProvider>
           <Navbar />

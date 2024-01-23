@@ -1,21 +1,45 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { print, getAllGames } from "../api/connection.api";
-import SearchBar from "@/components/searchbar";
+import useSearch from "@/contexts/searchContext";
+import { arrayShuffler } from "@/utils/arrayShuffler";
+import Card from "@/components/card";
+import { game } from "./types/game.types";
 
-type Props = {};
+const Page = () => {
+  const [games, setGames] = useState<game[]>([]);
 
-const games = async () => {
-  const results = await getAllGames();
-  console.log("results: ", results);
-};
+  const searchContext = useSearch();
 
-function Page({}: Props) {
+  const populateWithGames = async () => {
+    const results = await getAllGames();
+    console.log("results: ", results, "\nresults length: ", results.length);
+    return arrayShuffler(results);
+  };
+
+  // NOTE: the following code is used to get specific game from the API
+  // const getGames = async () => {
+  //   if (searchContext) {
+  //     const { searchResults, setSearchResults } = searchContext;
+  //     const results = await getAllGames();
+  //     if (results) setSearchResults(results);
+  //     console.log("searchResults: ", searchResults);
+  //   }
+  // };
+
   useEffect(() => {
-    games();
     try {
-      print();
+      // INFO: for testing
+      // print();
+
+      const getResults = async () => {
+        const results = await populateWithGames();
+        setGames(results);
+      };
+      getResults();
+      // scrolling to top of the page on reload
+      window.scrollTo(0, 0);
     } catch (error) {
       if (error instanceof Error) {
         console.error(error.message);
@@ -23,11 +47,13 @@ function Page({}: Props) {
     }
   }, []);
 
-  return (
-    <>
-      <div>Home</div>
-    </>
-  );
-}
+  {
+    if (games.length !== 0) {
+      games.map((game) => {
+        return <Card key={game.slug} {...game} />;
+      });
+    }
+  }
+};
 
 export default Page;

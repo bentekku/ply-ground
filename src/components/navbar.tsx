@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { links } from "../../data/data";
+import { links } from "../data/data";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { CgUser } from "react-icons/cg";

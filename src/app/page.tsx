@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { print, getAllGames } from "../../api/connection.api";
+import { print, getAllGames } from "../api/connection.api";
 
 type Props = {};
 try {

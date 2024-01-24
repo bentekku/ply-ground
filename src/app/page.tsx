@@ -14,7 +14,13 @@ const Page = () => {
 
   const populateWithGames = async () => {
     const results = await getAllGames();
-    console.log("results: ", results, "\nresults length: ", results.length);
+    console.log(
+      Date.now(),
+      " .Results: ",
+      results,
+      "\nresults length: ",
+      results.length
+    );
     return arrayShuffler(results);
   };
 

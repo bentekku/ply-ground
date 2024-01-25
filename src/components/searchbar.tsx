@@ -10,7 +10,7 @@ const SearchBar = (props: Props) => {
   return (
     <header className="relative w-full py-4 flex items-center justify-center mb-12">
       {/* Search bar */}
-      <nav className="w-full px-8 py-5 md:px-2 md:py-3 fixed top-0 flex items-center md:justify-center z-[9999]">
+      <nav className="w-full px-8 py-5 md:px-2 md:py-3 fixed top-0 flex items-center md:justify-center z-[9999] bg-gray-950/[96%]">
         <input
           className="w-4/5 md:w-[24rem] h-[2.25rem] rounded-lg text-white/85 px-3 bg-white/10 border border-white/10 no-outlines active:scale-105 focus:scale-105 shadow-md transition-all"
           type="search"

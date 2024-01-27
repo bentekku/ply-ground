@@ -1,4 +1,4 @@
-import { game } from "@/app/types/game.types";
+import { game } from "@/types/game.types";
 
 // NOTE: this is used to shuffle an array
 export const arrayShuffler = (array: game[]) => {

@@ -1,12 +1,17 @@
-import { game } from "@/app/types/game.types";
+"use client";
+
+import { game } from "@/types/game.types";
+import useSearch from "@/contexts/searchContext";
+import readableDate from "@/utils/readableDate";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React from "react";
-import { BiPlus, BiSolidStar } from "react-icons/bi";
+import React, { useState, useEffect } from "react";
+import { BiSolidStar } from "react-icons/bi";
 
 type CardProps = game;
 
 const Card = ({
+  id,
   name,
   released,
   background_image,
@@ -16,17 +21,15 @@ const Card = ({
 }: CardProps) => {
   // INFO: Router is used to redirect
   const router = useRouter();
+  // INFO: Grabbing gameID, and setGameID from useSearch to be used in other components
+  const { gameID, setGameID } = useSearch()!;
 
-  // NOTE: Converting `release` to a human readable format
-  const releasedDate = new Date(released);
-  const humanReadableDate = releasedDate.toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  });
+  const humanReadableDate = readableDate(released);
   // console.log(humanReadableDate);
 
-  const openGamePage = (arg_slug: string) => {
+  const openGamePage = (arg_slug: string, arg_id: number) => {
+    console.log(arg_slug, arg_id);
+    setGameID(arg_id);
     router.push(`/${arg_slug}`);
   };
 
@@ -34,7 +37,7 @@ const Card = ({
 
   return (
     <div
-      onClick={() => openGamePage(slug)}
+      onClick={() => openGamePage(slug, id)}
       className="group transition-all relative border border-white/10 flex flex-col w-[18rem] h-[20rem] md:w-[24rem] md:h-[18rem] lg:w-[28rem] lg:h-[20rem] rounded-xl overflow-clip cursor-pointer"
     >
       {/* Add to user-collection with status of the game */}

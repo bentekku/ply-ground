@@ -5,7 +5,7 @@ import { print, getAllGames } from "../api/connection.api";
 import useSearch from "@/contexts/searchContext";
 import { arrayShuffler } from "@/utils/arrayShuffler";
 import Card from "@/components/card";
-import { game } from "./types/game.types";
+import { game } from "../types/game.types";
 
 const Page = () => {
   const [games, setGames] = useState<game[]>([]);
@@ -14,6 +14,8 @@ const Page = () => {
 
   const populateWithGames = async () => {
     const results = await getAllGames();
+
+    // INFO: For testing
     console.log(
       Date.now(),
       " .Results: ",
@@ -21,18 +23,9 @@ const Page = () => {
       "\nresults length: ",
       results.length
     );
+
     return arrayShuffler(results);
   };
-
-  // NOTE: the following code is used to get specific game from the API
-  // const getGames = async () => {
-  //   if (searchContext) {
-  //     const { searchResults, setSearchResults } = searchContext;
-  //     const results = await getAllGames();
-  //     if (results) setSearchResults(results);
-  //     console.log("searchResults: ", searchResults);
-  //   }
-  // };
 
   useEffect(() => {
     try {

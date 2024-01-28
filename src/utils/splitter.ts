@@ -1,9 +1,10 @@
-export const descSplitter = (arg_string: string): string[] => {
-  if (arg_string) {
-    const stringArry = arg_string.split(".");
-    const newString = stringArry.slice(0, 210);
+export const descSplitter = (desc: string): string => {
+  if (desc) {
+    // NOTE: substring is used to shorten the description
+    // const newString = arg_string.substring(0, 1111) + "...";
+    const newString = desc;
     return newString;
   } else {
-    return [];
+    return "";
   }
 };

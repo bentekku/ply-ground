@@ -7,7 +7,14 @@ export type game = {
   background_image: string;
   rating: number;
   rating_top: number;
-  ratings: {};
+  ratings: [
+    {
+      id: number;
+      title: string;
+      count: number;
+      percent: number;
+    }
+  ];
   ratings_count: number;
   reviews_text_count: string;
   added: number;
@@ -32,6 +39,15 @@ export type game = {
       requirements: {
         minimum: string;
         recommended: string;
+      };
+    }
+  ];
+  parent_platforms: [
+    {
+      platform: {
+        id: number;
+        name: string;
+        slug: string;
       };
     }
   ];
@@ -79,4 +95,14 @@ export type game = {
   ];
   clip: undefined;
   description_raw: string;
+  tags: [
+    {
+      id: number;
+      name: string;
+      slug: string;
+      language: string;
+      games_count: number;
+      image_background: string;
+    }
+  ];
 };

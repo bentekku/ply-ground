@@ -55,7 +55,7 @@ export const getSpecificGame = async (id: number) => {
   }
 };
 
-// NOTE: Getting trailer(s) related to the specificGame
+// INFO: Getting trailer(s) related to the specificGame
 export const getTrailer = async (id: number) => {
   try {
     const response = await axios.get(

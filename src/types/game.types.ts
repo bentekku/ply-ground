@@ -105,4 +105,10 @@ export type game = {
       image_background: string;
     }
   ];
+  short_screenshots: [
+    {
+      id: number;
+      image: string;
+    }
+  ];
 };

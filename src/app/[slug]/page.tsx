@@ -12,6 +12,7 @@ import { descSplitter } from "@/utils/splitter";
 import capitalizer from "@/utils/capitalizer";
 import GameInfoCard from "@/components/game-info-card";
 import ReviewsCard from "@/components/reviews-card";
+import HeroImage from "@/components/hero-image";
 
 const SingleGamePage = () => {
   const searchContext = useSearch();
@@ -63,42 +64,11 @@ const SingleGamePage = () => {
   return (
     <main className="w-full h-full flex flex-col transition-all">
       {/* IMAGE HERO */}
-      <div className="relative w-full h-[24rem] md:h-[30rem] flex items-center justify-center">
-        {/* INFO: Conditionally rendering Trailer player */}
-        {isTrailerPresent ? (
-          <>
-            <Image
-              className="object-cover shadow-inner-lg shadow-black/50 blur-[.375rem]"
-              src={specificGame.background_image}
-              alt={`${specificGame.name}'s image`}
-              fill
-            />
-            <div className="px-4 py-6 w-[28rem] sm:w-[36rem] md:w-[44rem] lg:w-[48rem] aspect-video bg-white/[3.5%] rounded-2xl z-[2] shadow-black/10 shadow-md">
-              <video
-                className="w-full h-full"
-                src={trailer}
-                controls
-                preload="auto"
-              >
-                <source
-                  className="w-full h-full" // INFO: This isn't working
-                  src={trailer}
-                  type="video/mp4"
-                />
-                Your browser does not support the video tag.
-              </video>
-            </div>
-          </>
-        ) : (
-          <Image
-            className="object-cover shadow-inner-lg shadow-black/50 blur-[.02rem]"
-            src={specificGame.background_image}
-            alt={`${specificGame.name}'s image`}
-            fill
-          />
-        )}
-      </div>{" "}
-      {/* /IMAGE HERO */}
+      <HeroImage
+        specificGame={specificGame}
+        isTrailerPresent={isTrailerPresent}
+        trailer={trailer}
+      />{" "}
       {/* Content */}
       <div className="w-full px-4 py-6 md:px-10 md:py-12 lg:px-13 lg:py-15">
         <h1 className="text-4xl font-bold underline underline-offset-8 mb-8">
@@ -120,7 +90,7 @@ const SingleGamePage = () => {
           </p>
         </div>
 
-        {/* Mapping through reviews */}
+        {/* Reviews */}
         <ReviewsCard specificGame={specificGame} />
 
         {/* Game Info, such as, Publishers, Genres etc */}

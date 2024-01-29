@@ -2,17 +2,10 @@
 
 import React, { useEffect, useState } from "react";
 import { game } from "@/types/game.types";
-import { trailer, trailerResult } from "@/types/trailer.types";
 import useSearch from "@/contexts/searchContext";
 import { getSpecificGame, getTrailer } from "@/api/connection.api";
-import readableDate from "@/utils/readableDate";
-import Image from "next/image";
-import { BiCalendar, BiSolidStar } from "react-icons/bi";
-import { descSplitter } from "@/utils/splitter";
-import capitalizer from "@/utils/capitalizer";
-import GameInfoCard from "@/components/game-info-card";
-import ReviewsCard from "@/components/reviews-card";
 import HeroImage from "@/components/hero-image";
+import GameContent from "@/components/game-content";
 
 const SingleGamePage = () => {
   const searchContext = useSearch();
@@ -30,7 +23,6 @@ const SingleGamePage = () => {
     // return result;
     setSpecificGame(result);
   };
-
   // INFO: Getting trailer(s) related to the specificGame
   const getGameTrailer = async (arg_id: number) => {
     const result = await getTrailer(arg_id);
@@ -52,9 +44,6 @@ const SingleGamePage = () => {
     return result.preview;
   };
 
-  const humanReadableDate = readableDate(specificGame.released);
-  const newDescr = descSplitter(specificGame.description_raw);
-
   useEffect(() => {
     getGame(gameID);
     getGameTrailer(gameID);
@@ -70,33 +59,7 @@ const SingleGamePage = () => {
         trailer={trailer}
       />{" "}
       {/* Content */}
-      <div className="w-full px-4 py-6 md:px-10 md:py-12 lg:px-13 lg:py-15">
-        <h1 className="text-4xl font-bold underline underline-offset-8 mb-8">
-          {specificGame.name}
-        </h1>
-        <p className="text-sm text-white/70 px-4 leading-7 mb-4 w-4/5">
-          {newDescr}
-        </p>
-        {/* Release date and Rating */}
-        <div className="mb-12">
-          <p className="text-sm text-white/70 px-4 leading-6 mb-4 inline-flex gap-10 flex-wrap">
-            <span className="inline-flex items-center gap-2">
-              <BiCalendar /> {humanReadableDate}
-            </span>
-            <span className="inline-flex items-center gap-2">
-              <BiSolidStar /> {specificGame.rating} / 5 (
-              {specificGame.ratings_count})
-            </span>
-          </p>
-        </div>
-
-        {/* Reviews */}
-        <ReviewsCard specificGame={specificGame} />
-
-        {/* Game Info, such as, Publishers, Genres etc */}
-        <GameInfoCard specificGame={specificGame} />
-      </div>
-      {/* /Content */}
+      <GameContent specificGame={specificGame} />
     </main>
   );
 };

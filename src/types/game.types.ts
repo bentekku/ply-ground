@@ -105,10 +105,12 @@ export type game = {
       image_background: string;
     }
   ];
-  short_screenshots: [
-    {
-      id: number;
-      image: string;
-    }
-  ];
+
+  // the following array is not present on the api data
+  // short_screenshots: [
+  //   {
+  //     id: number;
+  //     image: string;
+  //   }
+  // ];
 };

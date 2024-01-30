@@ -17,6 +17,7 @@ import { BsFillStarFill } from "react-icons/bs";
 import readableDate from "@/utils/readableDate";
 import capitalizer from "@/utils/capitalizer";
 import { useRouter } from "next/navigation";
+import _ from "lodash";
 
 type Props = {};
 
@@ -68,6 +69,10 @@ const SearchBar = (props: Props) => {
     // return () => clearTimeout(timer);
 
     // INFO: Using debounce
+    const debouncedSearch = _.debounce((term: string) => {
+      searchThatGame(term);
+    }, 500);
+    debouncedSearch(searchTerm);
   }, [searchTerm]);
 
   return (

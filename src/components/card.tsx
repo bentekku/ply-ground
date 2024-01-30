@@ -5,9 +5,8 @@ import useSearch from "@/contexts/searchContext";
 import readableDate from "@/utils/readableDate";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { BiSolidStar } from "react-icons/bi";
-import openGamePage from "@/utils/openGamePage";
 
 type CardProps = game;
 
@@ -22,8 +21,8 @@ const Card = ({
 }: CardProps) => {
   // INFO: Router is used to redirect
   const router = useRouter();
-  // INFO: Grabbing gameID, and setGameID from useSearch to be used in other components
-  const { gameID, setGameID } = useSearch()!;
+  // INFO: Grabbing setGameID from useSearch to be used in other components
+  const { setGameID } = useSearch()!;
 
   const humanReadableDate = readableDate(released);
   // console.log(humanReadableDate);

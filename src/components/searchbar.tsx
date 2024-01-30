@@ -1,3 +1,5 @@
+// TODO: Need to optimize the searching for the games
+
 "use client";
 
 import Link from "next/link";
@@ -10,7 +12,6 @@ import Image from "next/image";
 import { BsFillStarFill } from "react-icons/bs";
 import readableDate from "@/utils/readableDate";
 import capitalizer from "@/utils/capitalizer";
-import GameSearchCard from "./game-search-card"; // no need for it now, decided to go this single component
 import { useRouter } from "next/navigation";
 
 type Props = {};
@@ -57,7 +58,7 @@ const SearchBar = (props: Props) => {
     if (searchTerm) {
       timer = setTimeout(() => {
         searchThatGame(searchTerm);
-      }, 1000);
+      }, 100);
     }
     // INFO: Incase the user changes the value of the input field before the timer ends, it will clear the timer
     return () => clearTimeout(timer);
@@ -72,11 +73,12 @@ const SearchBar = (props: Props) => {
           type="search"
           name="search-box"
           id=""
+          placeholder="Search for games..."
           onChange={(e) => {
             // setting searchTerm
             setSearchTerm(e.target.value);
             // preventing default behaviour, honestly there's no need for this as its not getting submitted instead the searchThatGame is being called indepentently of the submit button
-            e.preventDefault();
+            // e.preventDefault();
           }}
           value={searchTerm}
         />
@@ -90,7 +92,7 @@ const SearchBar = (props: Props) => {
 
       {/* Search result dropdown */}
       {searchTerm && (
-        <section className="fixed top-[3.7rem] z-[9999] w-full h-fit bg-gray-950/[97%] shadow-md shadow-white/10 rounded-3xl px-8 pt-4 pb-10 md:px-2 md:pt-4 md:pb-10 transition-all flex flex-col gap-4 overflow-y-scroll">
+        <section className="fixed top-[3.65rem] z-[9999] w-full h-fit bg-gray-950/[96%] shadow-md shadow-white/10 rounded-b-3xl px-8 pt-6 pb-10 md:px-2 md:pt-6 md:pb-10 transition-all flex flex-col gap-4">
           {/* Mapping throught the searchResults and displaying them */}
           {searchResults.map((game) => (
             <div
@@ -99,22 +101,25 @@ const SearchBar = (props: Props) => {
                 setSearchTerm("");
               }}
               key={game.id}
-              className="mx-auto w-full md:w-3/4 lg:w-1/2 px-2 py-2 flex items-center justify-center gap-2 md:gap-12 bg-white/5 shadow-md shadow-black/10 rounded-xl hover:scale-105 hover:cursor-pointer transition border border-white/90"
+              //  border border-white/90
+              className="mx-auto w-full md:w-3/4 lg:w-1/2 px-2 py-2 flex items-center justify-center gap-2 md:gap-12 bg-white/5 shadow-md shadow-black/10 rounded-xl hover:scale-105 hover:cursor-pointer transition"
             >
               {/* left - image */}
-              <div className="relative w-[14rem] max-w-[18rem] min-h-[5rem] h-[8rem] max-h-full border border-red-500/75">
+              {/* border border-red-500/75 */}
+              <div className="relative w-[14rem] max-w-[18rem] min-h-[5rem] h-[8rem] max-h-full ">
                 <Image
                   className="rounded-lg object-cover"
                   src={game.background_image}
-                  alt={game.name}
+                  alt={capitalizer(game.name)}
                   fill
                 />
               </div>
               {/* right - content */}
-              <div className="flex flex-col items-start px-3 border border-yellow-500/75">
+              {/*  border border-yellow-500/75 */}
+              <div className="flex flex-col items-start px-3">
                 <h1 className="text-[1rem] sm:text-[1.15rem] font-medium mb-2">
-                  {/* {capitalizer(searchResults[0]?.name)} */}
-                  {game.name}
+                  {capitalizer(game.name)}
+                  {/* {game.name} */}
                 </h1>
                 <p className="text-[.65rem] sm:text-sm text-white/30 inline-flex items-center text-center justify-center">
                   <span className="border border-white/10 py-[.2rem] px-[.4rem] rounded-full">

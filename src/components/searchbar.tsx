@@ -71,7 +71,7 @@ const SearchBar = (props: Props) => {
     // INFO: Using debounce
     const debouncedSearch = _.debounce((term: string) => {
       searchThatGame(term);
-    }, 500);
+    }, 2500);
     debouncedSearch(searchTerm);
   }, [searchTerm]);
 

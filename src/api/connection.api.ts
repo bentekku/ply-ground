@@ -1,6 +1,5 @@
 "use server";
 
-import { trailer, trailerResult } from "@/types/trailer.types";
 import axios from "axios";
 
 const API_KEY = process.env.API_KEY as string;
@@ -73,6 +72,34 @@ export const getTrailer = async (id: number) => {
   } catch (error) {
     if (error instanceof Error) {
       console.error("ERROR: ", error.message);
+    }
+  }
+};
+
+// INFO: Implement search
+// FYI: could pass the number of results that needed to be return by just passing it as an argument in this function below
+export const searchGame = async (searchQuery: string) => {
+  const fetchBodyParams = {
+    params: {
+      key: API_KEY as string,
+      search: searchQuery,
+      page_size: 2, // returning `n` results
+    },
+  };
+  try {
+    const response = await axios.get(`${BASE_URL}games`, fetchBodyParams);
+    const result = await response.data.results;
+    console.log(result);
+    if (result) {
+      // if (result.length > 1) {
+      //   return new Error("Too many results.");
+      // } else {
+      return result;
+      // }
+    }
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error("Error: ", error.message);
     }
   }
 };

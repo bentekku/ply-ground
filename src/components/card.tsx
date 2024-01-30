@@ -7,6 +7,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
 import { BiSolidStar } from "react-icons/bi";
+import openGamePage from "@/utils/openGamePage";
 
 type CardProps = game;
 
@@ -27,10 +28,10 @@ const Card = ({
   const humanReadableDate = readableDate(released);
   // console.log(humanReadableDate);
 
-  const openGamePage = (arg_slug: string, arg_id: number) => {
-    console.log(arg_slug, arg_id);
-    setGameID(arg_id);
-    router.push(`/${arg_slug}`);
+  const openGamePage = (slug: string, id: number) => {
+    console.log(slug, id);
+    setGameID(id);
+    router.push(`/${slug}`);
   };
 
   const toggleAddToUserCollection = () => {};

@@ -108,7 +108,6 @@ const GameInfoCard = ({ specificGame }: GameInfoCardProps) => {
           {/* /Tags */}
         </div>
       </section>
-      ;
     </>
   );
 };

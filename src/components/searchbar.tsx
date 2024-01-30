@@ -1,4 +1,8 @@
 // TODO: Need to optimize the searching for the games
+// TODO: Implement debounce
+// TODO: Implement lazy loading
+
+// INFO: The timer from NodeJS.Timer is not optimal way to limit how frequent the search function is called, in order to tackle that, we can use `debounce` and `lazy loading` components that needed to be done
 
 "use client";
 
@@ -53,15 +57,17 @@ const SearchBar = (props: Props) => {
   useEffect(() => {
     console.log("Query: ", searchTerm);
 
-    //INFO: Creating a timer
-    let timer: NodeJS.Timeout;
-    if (searchTerm) {
-      timer = setTimeout(() => {
-        searchThatGame(searchTerm);
-      }, 100);
-    }
-    // INFO: Incase the user changes the value of the input field before the timer ends, it will clear the timer
-    return () => clearTimeout(timer);
+    // //INFO: Creating a timer
+    // let timer: NodeJS.Timeout;
+    // if (searchTerm) {
+    //   timer = setTimeout(() => {
+    //     searchThatGame(searchTerm);
+    //   }, 100);
+    // }
+    // // INFO: Incase the user changes the value of the input field before the timer ends, it will clear the timer
+    // return () => clearTimeout(timer);
+
+    // INFO: Using debounce
   }, [searchTerm]);
 
   return (
@@ -92,7 +98,7 @@ const SearchBar = (props: Props) => {
 
       {/* Search result dropdown */}
       {searchTerm && (
-        <section className="fixed top-[3.65rem] z-[9999] w-full h-fit bg-gray-950/[96%] shadow-md shadow-white/10 rounded-b-3xl px-8 pt-6 pb-10 md:px-2 md:pt-6 md:pb-10 transition-all flex flex-col gap-4">
+        <section className="fixed top-[3.65rem] z-[9999] w-full md:w-3/4  h-fit bg-gray-950/[96%] shadow-md shadow-white/10 rounded-b-3xl px-8 pt-6 pb-10 md:px-16 md:pt-6 md:pb-10 transition-all flex flex-col gap-4">
           {/* Mapping throught the searchResults and displaying them */}
           {searchResults.map((game) => (
             <div
@@ -102,7 +108,7 @@ const SearchBar = (props: Props) => {
               }}
               key={game.id}
               //  border border-white/90
-              className="mx-auto w-full md:w-3/4 lg:w-1/2 px-2 py-2 flex items-center justify-center gap-2 md:gap-12 bg-white/5 shadow-md shadow-black/10 rounded-xl hover:scale-105 hover:cursor-pointer transition"
+              className="mx-auto w-full md:w-3/4 lg:w-1/2 px-2 py-2 flex items-center justify-center gap-2 md:gap-12 lg:gap-[5rem] bg-white/5 shadow-md shadow-black/10 rounded-xl hover:scale-105 hover:cursor-pointer transition"
             >
               {/* left - image */}
               {/* border border-red-500/75 */}

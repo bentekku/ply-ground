@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { print, getAllGames } from "../api/connection.api";
+import { print, getAllGames } from "@/api/connection.api";
 import { arrayShuffler } from "@/utils/arrayShuffler";
 import Card from "@/components/card";
-import { game } from "../types/game.types";
+import { game } from "@/types/game.types";
 
 const Page = () => {
   const [games, setGames] = useState<game[]>([]);

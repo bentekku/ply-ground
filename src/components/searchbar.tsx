@@ -11,7 +11,7 @@ import useSearchContext from "@/contexts/searchContext";
 import { searchGame } from "@/api/connection.api";
 import _ from "lodash";
 import GameSearchCard from "./game-search-card";
-import toast from "react-hot-toast";
+import { toast } from "react-hot-toast";
 
 const SearchBar = () => {
   const { searchTerm, setSearchTerm, searchResults, setSearchResults } =
@@ -24,7 +24,8 @@ const SearchBar = () => {
         setSearchResults(result);
         console.log("Game found: ", result);
       } else {
-        throw new Error("Game not found");
+        // throw new Error("Game not found");
+        toast.error("Game not found");
       }
     } catch (error) {
       if (error instanceof Error) {

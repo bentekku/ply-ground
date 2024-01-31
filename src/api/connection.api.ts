@@ -1,10 +1,15 @@
 "use server";
 
 import axios from "axios";
-import { toast } from "react-hot-toast";
 
 const API_KEY = process.env.API_KEY as string;
 const BASE_URL = process.env.BASE_URL as string;
+
+type dates = {
+  currentDate: string;
+  sixMonthsAgo: string;
+  formattedDate: string;
+};
 
 const fetchAllBodyParams = {
   params: {
@@ -33,7 +38,7 @@ export const getAllGames = async () => {
     return results;
   } catch (error) {
     if (error instanceof Error) {
-      toast.error(error.message);
+      console.error(error.message);
     }
   }
 };
@@ -51,7 +56,7 @@ export const getSpecificGame = async (id: number) => {
     return result;
   } catch (error) {
     if (error instanceof Error) {
-      toast.error(error.message);
+      console.error(error.message);
     }
   }
 };
@@ -73,7 +78,7 @@ export const getTrailer = async (id: number) => {
     }
   } catch (error) {
     if (error instanceof Error) {
-      toast.error(error.message);
+      console.error(error.message);
     }
   }
 };
@@ -97,7 +102,120 @@ export const searchGame = async (searchQuery: string) => {
     }
   } catch (error) {
     if (error instanceof Error) {
-      toast.error(error.message);
+      console.error(error.message);
+      throw new Error(error.message);
+    }
+  }
+};
+
+export const getTrendingGames = async (mnth: number) => {
+  const getNMonthsAgoDate = (month: number): dates => {
+    const currentDate = new Date();
+    const sixMonthsAgo = new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth() - month,
+      currentDate.getDate()
+    );
+    const formattedDate = sixMonthsAgo.toISOString().split("T")[0];
+    // For testing
+    // console.log(
+    //   `CurrentDate is: ${currentDate}. 6 months ago: ${sixMonthsAgo}. Formatted date: ${formattedDate}. SixMonthsAgo ISOString: ${sixMonthsAgo.toISOString()}`
+    // );
+
+    const dates: dates = {
+      currentDate: currentDate.toISOString().split("T")[0],
+      sixMonthsAgo: sixMonthsAgo.toISOString().split("T")[0],
+      formattedDate: formattedDate,
+    } as const;
+
+    return dates;
+  };
+
+  const { currentDate, sixMonthsAgo } = getNMonthsAgoDate(mnth);
+  // For testing
+  console.log(`CurrentDate is: ${currentDate}. 6 months ago: ${sixMonthsAgo}`);
+
+  const fetchParams = {
+    params: {
+      key: API_KEY as string,
+      // INFO: the limit for results is 40 by the api itself
+      // count: 111, // not sure what this is for, found it on the docs
+      page_size: 111,
+      // limiting results to biannually
+      // "2023-06-01,2024-12-31"
+      dates: `${sixMonthsAgo},${currentDate}`,
+      // dates: "2023-07-31,2024-01-31",
+      ordering: "-added",
+    },
+  };
+
+  try {
+    const response = await axios.get(`${BASE_URL}games`, fetchParams);
+    const results = await response.data.results;
+    if (results) {
+      return results;
+    } else {
+      console.error("Something went wrong");
+    }
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message);
+    }
+  }
+};
+
+export const getTopRatedGames = async (mnth: number) => {
+  const getNMonthsAgoDate = (month: number): dates => {
+    const currentDate = new Date();
+    const sixMonthsAgo = new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth() - month,
+      currentDate.getDate()
+    );
+    const formattedDate = sixMonthsAgo.toISOString().split("T")[0];
+    // For testing
+    // console.log(
+    //   `CurrentDate is: ${currentDate}. 6 months ago: ${sixMonthsAgo}. Formatted date: ${formattedDate}. SixMonthsAgo ISOString: ${sixMonthsAgo.toISOString()}`
+    // );
+
+    const dates: dates = {
+      currentDate: currentDate.toISOString().split("T")[0],
+      sixMonthsAgo: sixMonthsAgo.toISOString().split("T")[0],
+      formattedDate: formattedDate,
+    } as const;
+
+    return dates;
+  };
+
+  const { currentDate, sixMonthsAgo } = getNMonthsAgoDate(mnth);
+  // For testing
+  console.log(`CurrentDate is: ${currentDate}. 6 months ago: ${sixMonthsAgo}`);
+
+  const fetchParams = {
+    params: {
+      key: API_KEY as string,
+      // INFO: the limit for results is 40 by the api itself
+      // count: 111, // not sure what this is for, found it on the docs
+      page_size: 111,
+      // limiting results to biannually
+      // "2023-06-01,2024-12-31"
+      dates: `${sixMonthsAgo},${currentDate}`,
+      // dates: "2023-07-31,2024-01-31",
+      ordering: "-rating",
+    },
+  };
+
+  try {
+    const response = await axios.get(`${BASE_URL}games`, fetchParams);
+    const results = await response.data.results;
+    if (results) {
+      return results;
+    } else {
+      console.error("Something went wrong");
+    }
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message);
     }
   }
 };

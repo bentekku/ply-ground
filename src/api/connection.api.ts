@@ -1,6 +1,7 @@
 "use server";
 
 import axios from "axios";
+import { toast } from "react-hot-toast";
 
 const API_KEY = process.env.API_KEY as string;
 const BASE_URL = process.env.BASE_URL as string;
@@ -32,7 +33,7 @@ export const getAllGames = async () => {
     return results;
   } catch (error) {
     if (error instanceof Error) {
-      console.error("ERROR: ", error.message);
+      toast.error(error.message);
     }
   }
 };
@@ -50,7 +51,7 @@ export const getSpecificGame = async (id: number) => {
     return result;
   } catch (error) {
     if (error instanceof Error) {
-      console.error("ERROR: ", error.message);
+      toast.error(error.message);
     }
   }
 };
@@ -72,7 +73,7 @@ export const getTrailer = async (id: number) => {
     }
   } catch (error) {
     if (error instanceof Error) {
-      console.error("ERROR: ", error.message);
+      toast.error(error.message);
     }
   }
 };
@@ -96,7 +97,7 @@ export const searchGame = async (searchQuery: string) => {
     }
   } catch (error) {
     if (error instanceof Error) {
-      console.error("ERROR: ", error.message);
+      toast.error(error.message);
     }
   }
 };

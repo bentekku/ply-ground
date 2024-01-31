@@ -11,6 +11,7 @@ import useSearchContext from "@/contexts/searchContext";
 import { searchGame } from "@/api/connection.api";
 import _ from "lodash";
 import GameSearchCard from "./game-search-card";
+import toast from "react-hot-toast";
 
 const SearchBar = () => {
   const { searchTerm, setSearchTerm, searchResults, setSearchResults } =
@@ -27,7 +28,7 @@ const SearchBar = () => {
       }
     } catch (error) {
       if (error instanceof Error) {
-        console.error("ERROR: ", error.message);
+        toast.error(error.message);
       }
     }
   };

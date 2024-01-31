@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar";
 import { SearchProvider } from "@/contexts/searchContext";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,6 +23,8 @@ export default function RootLayout({
         <SearchProvider>
           <Navbar />
           {children}
+          {/* reversedOrder reverses the order of toasts, so that the newest one is at the top */}
+          <Toaster position="bottom-right" reverseOrder={true} />
         </SearchProvider>
       </body>
     </html>

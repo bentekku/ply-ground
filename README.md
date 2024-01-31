@@ -22,6 +22,7 @@
 - [ ] Implement **localStorage** to store data in the browser's localStorage; so the web-app doesn't throw error regarding game(s) data upon refresh (it throws *value is undefined*)
 
 | Future tasks:
+
 - [ ] Uncomment **User** link in the `searchbar` component
 - [ ] Implement **user** `Login` and `Register`
 - [ ] Add functionality that enables user to visit their profile, which provides options to change *username, profile picture, and password* .

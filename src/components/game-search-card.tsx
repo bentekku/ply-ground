@@ -5,47 +5,66 @@ import { game } from "@/types/game.types";
 import capitalizer from "@/utils/capitalizer";
 import readableDate from "@/utils/readableDate";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { BsFillStarFill } from "react-icons/bs";
 
 type GameSearchCardProps = {
-  searchResults: game[];
+  game: game;
 };
 
-const GameSearchCard = ({ searchResults }: GameSearchCardProps) => {
-  const humanReadableDate = readableDate(searchResults[0]?.released);
+const GameSearchCard = ({ game }: GameSearchCardProps) => {
+  const searchContext = useSearch();
+  const { setGameID, setSearchTerm } = searchContext!;
+  const router = useRouter();
+
+  const humanReadableDate = (released: string) => readableDate(released);
+
+  const openGamePage = (slug: string, id: number) => {
+    console.log(slug, id);
+    setGameID(id);
+    router.push(`/${slug}`);
+  };
 
   return (
-    <section className="absolute top-20 z-[9999] w-full bg-gray-950/[97%] shadow-md shadow-white/10 rounded-full px-8 py-5 md:px-2 md:py-3 h-[8rem] transition-all">
-      {/* Search result card */}
-      <div className="mt-[-1rem] mx-auto w-3/4  px-3 py-3 flex items-center justify-around bg-white/5 shadow-md shadow-black/10 rounded-xl hover:scale-105 hover:cursor-pointer transition">
-        {/* left - image */}
-        <div className="relative w-[16rem] h-[5rem]">
-          <Image
-            className="rounded-lg object-cover"
-            src={searchResults[0]?.background_image}
-            alt={searchResults[0]?.name}
-            fill
-          />
-        </div>
-        {/* right - content */}
-        <div>
-          <h1 className="text-[1.15rem] font-medium mb-2">
-            {capitalizer(searchResults[0]?.name)}
-          </h1>
-          <p className="text-sm text-white/30 inline-flex items-center">
-            <span className="border border-white/10 py-[.2rem] px-[.4rem] rounded-full">
-              {humanReadableDate}
-            </span>
-
-            <span className="ml-6 inline-flex items-center gap-3 border border-white/10 py-[.2rem] px-[.4rem] rounded-full">
-              <BsFillStarFill />
-              {searchResults[0]?.rating} / 5
-            </span>
-          </p>
-        </div>
+    <div
+      onClick={() => {
+        openGamePage(game.slug, game.id);
+        setSearchTerm("");
+      }}
+      key={game.id}
+      //  border border-white/90
+      className="mx-auto w-full md:w-3/4 lg:w-1/2 px-2 py-2 flex items-center justify-center gap-2 md:gap-12 lg:gap-[5rem] bg-white/5 shadow-md shadow-black/10 rounded-xl hover:scale-105 hover:cursor-pointer transition"
+    >
+      {/* left - image */}
+      {/* border border-red-500/75 */}
+      <div className="relative w-[14rem] max-w-[18rem] min-h-[5rem] h-[8rem] max-h-full ">
+        <Image
+          className="rounded-lg object-cover"
+          src={game.background_image}
+          alt={capitalizer(game.name)}
+          fill
+        />
       </div>
-    </section>
+      {/* right - content */}
+      {/*  border border-yellow-500/75 */}
+      <div className="flex flex-col items-start px-3">
+        <h1 className="text-[1rem] sm:text-[1.15rem] font-medium mb-2">
+          {capitalizer(game.name)}
+          {/* {game.name} */}
+        </h1>
+        <p className="text-[.65rem] sm:text-sm text-white/30 inline-flex items-center text-center justify-center">
+          <span className="border border-white/10 py-[.2rem] px-[.4rem] rounded-full">
+            {humanReadableDate(game.released)}
+          </span>
+
+          <span className="ml-6 text-center inline-flex items-center gap-3 border border-white/10 py-[.2rem] px-[.4rem] rounded-full">
+            <BsFillStarFill className="text-[1.1rem] sm:text-[.785rem]" />
+            {game.rating} / 5
+          </span>
+        </p>
+      </div>
+    </div>
   );
 };
 

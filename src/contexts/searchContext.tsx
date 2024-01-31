@@ -55,8 +55,9 @@ const useSearch = () => {
   const context = useContext(SearchContext);
   if (context === null) {
     throw new Error("useSearch must be used within a SearchProvider");
+  } else {
+    return useContext(SearchContext);
   }
-  return useContext(SearchContext);
 };
 
 export default useSearch;

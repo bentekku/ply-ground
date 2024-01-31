@@ -91,11 +91,7 @@ export const searchGame = async (searchQuery: string) => {
     const result = await response.data.results;
     console.log(result);
     if (result) {
-      // if (result.length > 1) {
-      //   return new Error("Too many results.");
-      // } else {
       return result;
-      // }
     }
   } catch (error) {
     if (error instanceof Error) {

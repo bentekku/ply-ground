@@ -59,12 +59,13 @@ const SearchBar = () => {
           }}
           value={searchTerm}
         />
-        <Link
+        {/* User */}
+        {/* <Link
           className="group absolute top-[1.2rem] right-5 md:right-[3rem] md:top-[.5rem]  border border-white/20 p-2 rounded-full bg-gray-950 shadow-md "
           href="#"
         >
           <CgUser className="text-2xl text-white/30 group-hover:text-white transition" />
-        </Link>
+        </Link> */}
       </nav>
 
       {/* Search result dropdown */}

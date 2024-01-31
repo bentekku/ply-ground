@@ -6,9 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import SearchBar from "./searchbar";
 
-type Props = {};
-
-function Navbar({}: Props) {
+function Navbar() {
   const path = usePathname();
 
   return (

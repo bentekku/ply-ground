@@ -2,15 +2,12 @@
 
 import React, { useEffect, useState } from "react";
 import { print, getAllGames } from "../api/connection.api";
-import useSearch from "@/contexts/searchContext";
 import { arrayShuffler } from "@/utils/arrayShuffler";
 import Card from "@/components/card";
 import { game } from "../types/game.types";
 
 const Page = () => {
   const [games, setGames] = useState<game[]>([]);
-
-  const searchContext = useSearch();
 
   const populateWithGames = async () => {
     const results = await getAllGames();

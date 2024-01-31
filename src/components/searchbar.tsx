@@ -7,18 +7,14 @@
 import Link from "next/link";
 import React, { useEffect, Suspense } from "react";
 import { CgUser } from "react-icons/cg";
-import useSearch from "@/contexts/searchContext";
+import useSearchContext from "@/contexts/searchContext";
 import { searchGame } from "@/api/connection.api";
 import _ from "lodash";
 import GameSearchCard from "./game-search-card";
 
-type Props = {};
-
-const SearchBar = (props: Props) => {
-  const searchContext = useSearch();
-
+const SearchBar = () => {
   const { searchTerm, setSearchTerm, searchResults, setSearchResults } =
-    searchContext!;
+    useSearchContext();
 
   const searchThatGame = async (query: string) => {
     try {
@@ -31,7 +27,7 @@ const SearchBar = (props: Props) => {
       }
     } catch (error) {
       if (error instanceof Error) {
-        console.error("Error: ", error.message);
+        console.error("ERROR: ", error.message);
       }
     }
   };

@@ -57,7 +57,7 @@ const SingleGamePage = () => {
         specificGame={specificGame}
         isTrailerPresent={isTrailerPresent}
         trailer={trailer}
-      />{" "}
+      />
       {/* Content */}
       <GameContent specificGame={specificGame} />
     </main>

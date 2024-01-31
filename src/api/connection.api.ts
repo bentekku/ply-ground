@@ -19,6 +19,7 @@ const fetchOneBodyParams = {
   },
 };
 
+// INFO: For testing
 export const print = (): void => {
   console.info("api_key: ", API_KEY, "\nbase_url: ", BASE_URL);
 };
@@ -31,7 +32,7 @@ export const getAllGames = async () => {
     return results;
   } catch (error) {
     if (error instanceof Error) {
-      console.error("Error: ", error.message);
+      console.error("ERROR: ", error.message);
     }
   }
 };
@@ -95,7 +96,7 @@ export const searchGame = async (searchQuery: string) => {
     }
   } catch (error) {
     if (error instanceof Error) {
-      console.error("Error: ", error.message);
+      console.error("ERROR: ", error.message);
     }
   }
 };

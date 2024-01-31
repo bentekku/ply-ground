@@ -1,6 +1,9 @@
+// TODO: Add to user-collection
+
 import { game } from "@/types/game.types";
 import Image from "next/image";
 import React from "react";
+import AddToTracking from "./add-to-tracking";
 
 type HeroImageProps = {
   specificGame: game;
@@ -16,6 +19,9 @@ const HeroImage = ({
   return (
     <>
       <section className="relative w-full h-[24rem] md:h-[30rem] flex items-center justify-center">
+        {/* Add to user-collection, WIP */}
+        {/* <AddToTracking /> */}
+
         {/* INFO: Conditionally rendering Trailer player */}
         {isTrailerPresent ? (
           <>

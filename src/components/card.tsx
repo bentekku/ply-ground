@@ -33,8 +33,6 @@ const Card = ({
     router.push(`/${slug}`);
   };
 
-  const toggleAddToUserCollection = () => {};
-
   return (
     <div
       onClick={() => openGamePage(slug, id)}
@@ -49,11 +47,6 @@ const Card = ({
         // priority
         loading="eager"
       />
-
-      {/* Add to user-collection */}
-      <div className="absolute md:group-hover:block md:hidden right-4 top-4 p-4 bg-white text-black flex items-center justify-center text-center font-medium text-xl rounded-full shadow-black/50 shadow-lg border border-white/40 cursor-pointer hover:scale-110 focus:scale-110 outline-none transition">
-        +
-      </div>
 
       <div className="absolute flex justify-between items-start bg-black/60 w-full px-4 py-5 bottom-0 ">
         {/* left */}

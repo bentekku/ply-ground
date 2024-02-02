@@ -1,6 +1,6 @@
 "use client";
 
-import useSearch from "@/contexts/searchContext";
+import useSearchContext from "@/contexts/searchContext";
 import { game } from "@/types/game.types";
 import capitalizer from "@/utils/capitalizer";
 import readableDate from "@/utils/readableDate";
@@ -14,15 +14,15 @@ type GameSearchCardProps = {
 };
 
 const GameSearchCard = ({ game }: GameSearchCardProps) => {
-  const searchContext = useSearch();
-  const { setGameID, setSearchTerm } = searchContext!;
   const router = useRouter();
+  const { setGameID, setSearchTerm } = useSearchContext();
 
   const humanReadableDate = (released: string) => readableDate(released);
 
   const openGamePage = (slug: string, id: number) => {
     console.log(slug, id);
     setGameID(id);
+    localStorage.setItem("gameID", id.toString());
     router.push(`/${slug}`);
   };
 

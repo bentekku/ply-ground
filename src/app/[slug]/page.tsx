@@ -2,16 +2,17 @@
 
 import React, { useEffect, useState } from "react";
 import { game } from "@/types/game.types";
-import useSearch from "@/contexts/searchContext";
 import { getSpecificGame, getTrailer } from "@/api/connection.api";
 import HeroImage from "@/components/hero-image";
 import GameContent from "@/components/game-content";
+import useSearchContext from "@/contexts/searchContext";
 
 const SingleGamePage = () => {
-  const searchContext = useSearch();
+  // NOTE: Implemented localStorage to store `gameID` for it to be used again in case the user reloads to singleGamePage
+  const searchContext = useSearchContext();
+  const storedGameID = parseInt(localStorage.getItem("gameID") || "0");
+  const gameID = storedGameID || searchContext.gameID;
 
-  // INFO: ! means it's not null, precisely it means, the searchContext won't be null
-  const { gameID, setGameID } = searchContext!;
   // not sure how it's working, but it is working
   const [specificGame, setSpecificGame] = useState<game>({} as game);
   const [trailer, setTrailer] = useState<string>("");

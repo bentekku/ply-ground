@@ -2,7 +2,7 @@
 
 import { game } from "@/types/game.types";
 import Image from "next/image";
-import React from "react";
+import React, { Suspense } from "react";
 import AddToTracking from "./add-to-tracking";
 
 type HeroImageProps = {
@@ -31,21 +31,23 @@ const HeroImage = ({
               alt={`${specificGame.name}'s image`}
               fill
             />
-            <div className="px-4 py-6 w-[28rem] sm:w-[36rem] md:w-[44rem] lg:w-[48rem] aspect-video bg-white/[3.5%] rounded-2xl z-[2] shadow-black/10 shadow-md">
-              <video
-                className="w-full h-full"
-                src={trailer}
-                controls
-                preload="auto"
-              >
-                <source
-                  className="w-full h-full" // INFO: This isn't working
+            <Suspense fallback={<div>Loading...</div>}>
+              <div className="px-4 py-6 w-[28rem] sm:w-[36rem] md:w-[44rem] lg:w-[48rem] aspect-video bg-white/[3.5%] rounded-2xl z-[2] shadow-black/10 shadow-md">
+                <video
+                  className="w-full h-full"
                   src={trailer}
-                  type="video/mp4"
-                />
-                Your browser does not support the video tag.
-              </video>
-            </div>
+                  controls
+                  preload="auto"
+                >
+                  <source
+                    className="w-full h-full" // INFO: This isn't working
+                    src={trailer}
+                    type="video/mp4"
+                  />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            </Suspense>
           </>
         ) : (
           <Image

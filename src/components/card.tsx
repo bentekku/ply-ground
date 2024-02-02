@@ -1,12 +1,12 @@
 "use client";
 
 import { game } from "@/types/game.types";
-import useSearch from "@/contexts/searchContext";
 import readableDate from "@/utils/readableDate";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { BiSolidStar } from "react-icons/bi";
+import useSearchContext from "@/contexts/searchContext";
 
 type CardProps = game;
 
@@ -21,8 +21,8 @@ const Card = ({
 }: CardProps) => {
   // INFO: Router is used to redirect
   const router = useRouter();
-  // INFO: Grabbing setGameID from useSearch to be used in other components
-  const { setGameID } = useSearch()!;
+  // INFO: Grabbing setGameID from useSearchContext to be used in other components
+  const { setGameID } = useSearchContext();
 
   const humanReadableDate = readableDate(released);
   // console.log(humanReadableDate);
@@ -30,6 +30,7 @@ const Card = ({
   const openGamePage = (slug: string, id: number) => {
     console.log(slug, id);
     setGameID(id);
+    localStorage.setItem("gameID", id.toString());
     router.push(`/${slug}`);
   };
 

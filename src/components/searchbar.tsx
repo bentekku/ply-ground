@@ -1,6 +1,4 @@
-// TODO: fix null error of the searchContext [in progress]
-
-// INFO: The timer from NodeJS.Timer is not optimal way to limit how frequent the search function is called, in order to tackle that, we can use `debounce` and `lazy loading` components that needed to be done
+// NOTE: The timer from NodeJS.Timer is not(*now its working) optimal way to limit how frequent the search function is called, in order to tackle that, we can use `debounce` and `lazy loading` components that needed to be done
 
 "use client";
 
@@ -9,7 +7,6 @@ import React, { useEffect, Suspense } from "react";
 import { CgUser } from "react-icons/cg";
 import useSearchContext from "@/contexts/searchContext";
 import { searchGame } from "@/api/connection.api";
-import _ from "lodash";
 import GameSearchCard from "./game-search-card";
 import { toast } from "react-hot-toast";
 
@@ -37,11 +34,11 @@ const SearchBar = () => {
   useEffect(() => {
     console.log("Query: ", searchTerm);
 
-    // INFO: Using debounce
-    const debouncedSearch = _.debounce((term: string) => {
-      searchThatGame(term);
-    }, 800);
-    debouncedSearch(searchTerm);
+    const timeoutId = setTimeout(() => {
+      searchThatGame(searchTerm);
+    }, 1500);
+
+    return () => clearTimeout(timeoutId);
   }, [searchTerm]);
 
   return (

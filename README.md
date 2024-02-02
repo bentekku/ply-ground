@@ -25,10 +25,11 @@
 - [x] Create `Recommended` page.
 - [x] Write a function called `getTopRatedGames(number)` which requests the results from the **RAWG API**. The results are sorted based on the *ratings*.
 
-- [ ] Implement **localStorage** to store data in the browser's localStorage; so the web-app doesn't throw error regarding game(s) data upon refresh (it throws *value is undefined*)
+- [x] Implement **localStorage** to store data in the browser's localStorage; so the web-app doesn't throw error regarding game(s) data upon refresh (it throws *value is undefined*)
 
 | Future tasks:
 
+- [ ] Implement FramerMotion for subtle animations
 - [ ] Uncomment **User** link in the `searchbar` component
 - [ ] Implement **user** `Login` and `Register`
 - [ ] Add functionality that enables user to visit their profile, which provides options to change *username, profile picture, and password* .

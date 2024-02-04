@@ -1,5 +1,64 @@
 # plyGround
 
+## Overview
+
+Welcome to the **plyGround** a video game catalog website, a showcase of gaming titles with a unique user interface. This project is developed using Next.js 14.1.0, TypeScript, Tailwind CSS, Axios, React-Icons, and React-hot-toast. The website features a distinctive navbar at the bottom, a search bar at the top, and showcases a variety of games on the home page. The home page displays 40 games retrieved from the API using the GET method, with the option to randomize their sequence.
+
+## Features
+
+- **Navbar**: A unique navigation bar at the bottom of the website for easy access to different pages.
+- **Search Bar**: Located at the top of the website for quick game searches.
+- **Home Page**: Displays 40 games in a card format with details like title, release date, and overall rating. Games can be randomized.
+- **Trending Page (/trending)**: Shows trending games from the current date to a specified prior date using the `getTrendingGames()` function.
+- **Recommended Page (/recommended)**: Suggests games based on user ratings with the option to provide a rating as an argument.
+- **LocalStorage**: Stores the data of the currently open game in the *localStorage* to facilitate reaccess in case the user reloads the page.
+
+## Getting Started
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/bentekku/ply-ground.git
+   cd ply-ground
+   ```
+
+2. **Install Dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Run the Application:**
+   ```bash
+   npm run dev
+   ```
+
+4. Open your browser and visit `http://localhost:3000` to view the application.
+
+## Future Changes
+
+- **Backend Integration**: Future plans include adding a backend to allow users to track games they have played, are playing, shelved, or want to play.
+- **Authorization**: Implementation of user authentication with either Clerk Auth or Next Auth for secure access to personalized features.
+
+## Dependencies
+
+- **Next.js 14.1.0**
+- **TypeScript**
+- **Tailwind CSS**
+- **Axios**
+- **React-Icons**
+- **React-hot-toast**
+
+## Contributing
+
+Feel free to contribute to the project. Create a pull request with your proposed changes.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
+## Acknowledgements
+
+Special thanks to the developers of Next.js, TypeScript, Tailwind CSS, Axios, React-Icons, and React-hot-toast for their amazing tools and libraries.
+
 ## TODO
 
 - [x] Create small hover `navbar` for website navigation.

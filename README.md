@@ -1,4 +1,5 @@
 # plyGround
+| Note: The application is unoptimized as of now, and will take some time to fetch and display all the information.
 
 ## Overview
 
@@ -35,7 +36,7 @@ Welcome to the **plyGround** a video game catalog website, a showcase of gaming 
 
 ## Future Changes
 
-- **Backend Integration**: Future plans include adding a backend to allow users to track games they have played, are playing, shelved, or want to play.
+- **Backend Integration**: Plans include adding a backend to allow users to track games they have played, are playing, shelved, or want to play.
 - **Authorization**: Implementation of user authentication with either Clerk Auth or Next Auth for secure access to personalized features.
 
 ## Dependencies

@@ -89,6 +89,7 @@ Special thanks to the developers of Next.js, TypeScript, Tailwind CSS, Axios, Re
 
 | Future tasks:
 
+- [ ] Filter out NSFW games
 - [ ] Implement FramerMotion for subtle animations
 - [ ] Uncomment **User** link in the `searchbar` component
 - [ ] Implement **user** `Login` and `Register`

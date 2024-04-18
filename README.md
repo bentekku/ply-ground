@@ -45,6 +45,7 @@ Welcome to the **plyGround** a video game catalog website, a showcase of gaming 
 - **TypeScript**
 - **Tailwind CSS**
 - **Axios**
+- **RAWG API**
 - **React-Icons**
 - **React-hot-toast**
 

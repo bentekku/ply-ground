@@ -12,7 +12,7 @@ const GameInfoCard = ({ specificGame }: GameInfoCardProps) => {
     <>
       <section className="w-3/4  md:w-4/5 lg:w-[46rem] h-full lg:h-[36rem] mx-auto flex flex-wrap lg:flex-nowrap items-start justify-around mb-16 ">
         {/* Image */}
-        <div className="relative hidden w-[12rem] md:w-[18rem] lg:w-[24rem]  lg:block lg:h-[36rem] rounded-lg overflow-hidden   border border-yellow-500/20">
+        <div className="relative hidden w-[12rem] md:w-[18rem] lg:w-[24rem]  lg:block lg:h-[36rem] rounded-lg overflow-hidden">
           <Image
             className="object-cover"
             fill
